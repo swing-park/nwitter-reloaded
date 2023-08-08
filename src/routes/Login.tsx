@@ -11,6 +11,7 @@ import {
   Title,
   Wrapper,
 } from "../components/Auth";
+import GithubButton from "../components/GithubButton";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ const Login = () => {
       <Switcher>
         계정이 없으신가요 ? <Link to="/create-account">계정 만들기 →</Link>
       </Switcher>
+      <GithubButton />
     </Wrapper>
   );
 };
