@@ -1,7 +1,8 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { auth, db } from "../firebase";
+import { auth, db, storage } from "../firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const Form = styled.form`
   display: flex;
@@ -82,22 +83,38 @@ const PostTweetForm = () => {
 
     try {
       setIsLoading(true);
-      await addDoc(collection(db, "tweets"), {
+      const doc = await addDoc(collection(db, "tweets"), {
         tweet,
         createAt: Date.now(),
         username: user.displayName || "Anonoymous",
         userId: user.uid,
       });
+
+      if (file) {
+        const locationRef = ref(
+          storage,
+          `tweets/${user.uid}-${user.displayName}/${doc.id}`
+        );
+
+        const ret = await uploadBytes(locationRef, file);
+        const url = await getDownloadURL(ret.ref);
+        await updateDoc(doc, {
+          photo: url,
+        });
+      }
     } catch (err) {
       console.error(err);
     } finally {
       setIsLoading(false);
+      setTweet("");
+      setFile(null);
     }
   };
 
   return (
     <Form onSubmit={handleOnSubmit}>
       <TextArea
+        required
         rows={5}
         maxLength={180}
         placeholder="What is happening?"
