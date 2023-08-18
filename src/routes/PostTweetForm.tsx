@@ -90,7 +90,7 @@ const PostTweetForm = () => {
         userId: user.uid,
       });
 
-      if (file) {
+      if (file && file.size < 1024 ** 3) {
         const locationRef = ref(
           storage,
           `tweets/${user.uid}-${user.displayName}/${doc.id}`
