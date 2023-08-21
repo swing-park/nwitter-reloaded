@@ -34,11 +34,7 @@ const Tweet = ({ username, photo, tweet }: ITweet) => {
         <UserName>{username}</UserName>
         <Payload>{tweet}</Payload>
       </Column>
-      {photo ? (
-        <Column>
-          <Photo src={photo} />
-        </Column>
-      ) : null}
+      <Column>{photo ? <Photo src={photo} /> : null}</Column>
     </Wrapper>
   );
 };
