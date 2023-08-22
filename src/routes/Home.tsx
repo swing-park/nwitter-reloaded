@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PostTweetForm from "./PostTweetForm";
+import PostTweetForm from "../components/PostTweetForm";
 import TimeLine from "../components/TimeLine";
 
 const Wrapper = styled.div`

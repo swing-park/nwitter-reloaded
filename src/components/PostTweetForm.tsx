@@ -91,10 +91,7 @@ const PostTweetForm = () => {
       });
 
       if (file && file.size < 1024 ** 2) {
-        const locationRef = ref(
-          storage,
-          `tweets/${user.uid}-${user.displayName}/${doc.id}`
-        );
+        const locationRef = ref(storage, `tweets/${user.uid}/${doc.id}`);
 
         const ret = await uploadBytes(locationRef, file);
         const url = await getDownloadURL(ret.ref);
