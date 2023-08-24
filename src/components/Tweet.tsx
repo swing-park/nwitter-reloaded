@@ -61,6 +61,7 @@ const Tweet = ({ username, photo, tweet, userId, docId }: ITweet) => {
     }
   };
 
+  // TODO: edit tweet for mine, del edit photo,
   return (
     <Wrapper>
       <Column>
