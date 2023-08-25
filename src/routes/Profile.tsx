@@ -106,7 +106,7 @@ const Profile = () => {
     fetchTweets();
   }, [fetchTweets]);
 
-  // TODO: edit username
+  // TODO: edit username, tweet realtime update
   return (
     <Wrapper>
       <AvatarUpload htmlFor="avatar">
